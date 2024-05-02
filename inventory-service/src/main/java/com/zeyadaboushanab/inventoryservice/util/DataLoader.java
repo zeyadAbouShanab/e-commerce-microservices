@@ -18,7 +18,7 @@ public class DataLoader implements CommandLineRunner {
 
         Inventory inventory1 = new Inventory();
         inventory1.setSkuCode("product2");
-        inventory1.setQuantity(0);
+        inventory1.setQuantity(50);
 
         inventoryRepository.save(inventory);
         inventoryRepository.save(inventory1);
