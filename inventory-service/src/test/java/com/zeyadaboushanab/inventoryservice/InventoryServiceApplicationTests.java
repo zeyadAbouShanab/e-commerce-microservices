@@ -10,4 +10,7 @@ class InventoryServiceApplicationTests {
 	void contextLoads() {
 	}
 
+    @Test
+    void addAllProducts() {
+    }
 }
