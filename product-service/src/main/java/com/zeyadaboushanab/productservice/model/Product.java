@@ -14,6 +14,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @Builder
 @Data
+
 public class Product {
 
     @Id

@@ -1,2 +1,2 @@
-# e-commerce-microservices
+# E-commerce-microservices
 Simple project about microservices for an e-commerce project

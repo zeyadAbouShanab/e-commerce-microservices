@@ -12,10 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.util.UriBuilder;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -28,16 +25,26 @@ public class InventoryService {
 
     @Transactional(readOnly = true)
     @SneakyThrows
-    public List<InventoryResponse> isInStock(List<String> skuCode) {
+    public List<InventoryResponse> isInStock(List<String> skuCodes) {
         log.info("Checking Inventory");
-        return inventoryRepository.findBySkuCodeIn(skuCode).stream()
-                .map(inventory ->
+
+        // Fetch inventory records for the given skuCodes
+        List<Inventory> inventoryList = inventoryRepository.findBySkuCodeIn(skuCodes);
+
+        // Create a map to store skuCode -> isInStock mapping for found inventory records
+        Map<String, Boolean> isInStockMap = new HashMap<>();
+        inventoryList.forEach(inventory -> isInStockMap.put(inventory.getSkuCode(), inventory.getQuantity() > 0));
+
+        // Create InventoryResponse objects for each skuCode, setting isInStock to false if no corresponding inventory record is found
+        return skuCodes.stream()
+                .map(skuCode ->
                         InventoryResponse.builder()
-                                .skuCode(inventory.getSkuCode())
-                                .isInStock(inventory.getQuantity() > 0)
+                                .skuCode(skuCode)
+                                .isInStock(isInStockMap.getOrDefault(skuCode, false))
                                 .build()
                 ).toList();
     }
+
 
     public List<Product> getAllProducts(){
 

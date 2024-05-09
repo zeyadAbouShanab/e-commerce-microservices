@@ -170,6 +170,7 @@ services:
       - postgres-inventory
       - discovery-server
       - api-gateway
+      - product-service
 
   ## Notification-Service Docker Compose Config
   notification-service:

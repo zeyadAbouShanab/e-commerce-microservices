@@ -58,6 +58,8 @@ public class OrderService {
                     .retrieve()
                     .bodyToMono(InventoryResponse[].class)
                     .block();
+            log.info("Inventory response: " + Arrays.toString(inventoryResponseArray));
+
 
             boolean allProductsInStock = Arrays.stream(inventoryResponseArray)
                     .allMatch(InventoryResponse::isInStock);
@@ -68,7 +70,7 @@ public class OrderService {
                 applicationEventPublisher.publishEvent(new OrderPlacedEvent(this, order.getOrderNumber()));
                 return "Order Placed";
             } else {
-                throw new IllegalArgumentException("Product is not in stock, please try again later");
+                return "One or more products is not in stock, please try again later";
             }
         });
 
