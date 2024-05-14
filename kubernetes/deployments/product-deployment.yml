@@ -22,6 +22,12 @@ spec:
               value: docker
           image: zeyadaboushanab/product-service:latest
           name: product-service
-          resources: {}
+          resources:
+            requests:
+              memory: "256Mi"   # Request 256 MiB of memory
+              cpu: "250m"       # Request 250 milliCPU (0.25 CPU)
+            limits:
+              memory: "512Mi"   # Limit to 512 MiB of memory
+              cpu: "500m"
       restartPolicy: Always
 status: {}
