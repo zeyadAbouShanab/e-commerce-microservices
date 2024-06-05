@@ -71,7 +71,7 @@
                     <to><image>registry.hub.docker.com/zeyadaboushanab/${artifactId}</image>
                         <auth>
                             <username>zeyadaboushanab</username> <!-- Your Docker Hub username -->
-                            <password>Zz_4266220</password> <!-- Your Docker Hub password -->
+                            <password>Zz4266220Zz</password> <!-- Your Docker Hub password -->
                         </auth>
                     </to>
                 </configuration>
